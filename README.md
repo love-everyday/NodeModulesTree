@@ -1,5 +1,5 @@
 # NodesTree
-This project can help you know about that which `npm packages` used in your project.<br>
+This project can help you know which `npm packages` used in your project.<br>
 Only supported `Chrome Browser`.
 * [Egg](https://eggjs.org/en/intro/index.html)
 * [Art Template](https://aui.github.io/art-template/docs/index.html)
