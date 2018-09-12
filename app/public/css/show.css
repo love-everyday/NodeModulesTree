@@ -1,0 +1,127 @@
+.container {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    display: inline-flex;
+}
+.card {
+    padding: 0 20px;
+    box-shadow: 1px 1px 7px 1px #ccccccd6;
+    border-radius: 4px;
+    min-width: 250px;
+}
+.card h2 {
+    display: inline-block;
+}
+.title {
+    font-size: 23px;
+    font-weight: bold;
+    padding-top: 20px;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+.version {
+    display: inline-block;
+    margin-left: 10px;
+    text-decoration: none;
+    color: #000;
+}
+.version:hover {
+    color: #cb3837;
+}
+.dot-green {
+    background-color: rgb(74, 245, 6);
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.divider {
+    width: auto;
+    height: 1px;
+    background-color: #cccccc;
+}
+.sub-title {
+    font-size: 16px; 
+    font-weight: bold;
+    padding: 20px 0 10px 0;
+}
+.sub-dict {
+    display: grid;
+    grid-template-columns: 1fr 70px;
+    border-top:1px dashed #cccccc;
+    cursor: pointer;
+    color: #000;
+    min-height: 33px;
+}
+.sub-dict:hover {
+    color: #1890ff; 
+}
+.sub-key {
+    font-size: 14px; 
+    font-weight: bold;
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: center;
+    word-break: break-all;
+}
+.sub-value {
+    font-size: 14px; 
+    grid-area: 1 / 2 / 2 / 3;
+    justify-self: end;
+    align-self: center;
+    word-break: break-all;
+}
+.path-detail {
+    margin-left: 20px;
+}
+.name {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+.name:hover{
+    color: #1890ff; 
+}
+.description {
+    font-size: 14px;
+    color: #797979;
+    display: block;
+    padding-bottom: 10px;
+}
+.version-detail {
+    display: grid;
+    grid-template-columns: 1fr 150px 8px;
+    color: #000;
+    min-height: 33px;
+    padding: 0 10px;
+}
+.version-detail-name {
+    font-size: 14px; 
+    font-weight: bold;
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: center;
+    word-break: break-all;
+    justify-self: left;
+}
+.version-detail-time {
+    font-size: 14px; 
+    grid-area: 1 / 2 / 2 / 3;
+    justify-self: end;
+    align-self: center;
+    word-break: break-all;
+    margin-right: 10px;
+}
+.version-detail-dot-green {
+    background-color: rgb(74, 245, 6);
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    align-self: center;
+}
+.version-detail-dot-red {
+    background-color: rgb(245, 121, 6);
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    align-self: center;
+}

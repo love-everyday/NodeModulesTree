@@ -1,0 +1,67 @@
+<div class="card" id=card-{{pathIndex}}>
+    {{set hrefPage = homepage ? homepage : "javascript:volid(0);"}}
+    {{set hrefClass = homepage ? 'name' : ''}}
+    <a class={{hrefClass}} href={{hrefPage}} target="_blank">
+        <div class="title">{{ name }}</div>
+    </a>
+    {{if packageName}}
+        {{set hrefVersion = `https://www.npmjs.com/package/${packageName}`}}
+        <a href={{hrefVersion}} class="version" target="_blank">{{ version }}</a>
+    {{/if}}
+    {{if packagePath}}
+        <i id=open-file-{{pathIndex}} class="name iconfont icon-wenjianjia" style="display:inline-block;margin-left: 10px;">
+            <div id='open-file-path' style="display:none;">{{packagePath}}</div>
+        </i>
+    {{/if}}
+    {{if versionDetail && versionDetail.current}}
+        <div class="version-detail">
+            <div class="version-detail-name">{{versionDetail.current.version}}</div>
+            <div class="version-detail-time">{{versionDetail.current.time}}</div>
+            <div class="version-detail-dot-red"></div>
+        </div>
+    {{/if}}
+    {{if versionDetail && versionDetail.latest}}
+        <div class="version-detail">
+            <div class="version-detail-name">{{versionDetail.latest.version}}</div>
+            <div class="version-detail-time">{{versionDetail.latest.time}}</div>
+            <div class="version-detail-dot-green"></div>
+        </div>
+    {{/if}}
+    {{set des = description || (versionDetail && versionDetail.description)}}
+    {{if des}}
+        <div class="description">{{des}}</div>
+    {{/if}}
+    {{if dependencies || devDependencies}}
+        <div class="divider"></div>
+        <div style="text-align: left;padding-bottom: 20px;" id=dependencies-{{pathIndex}}>
+            {{if dependencies}}
+                <div style="background-color: #87ff6a26;padding: 0 10px;">
+                <div class="sub-title">dependencies</div>
+                {{each dependencies}}
+                    <div class="sub-dict" id=d@@@{{pathIndex}}@@@{{$index}}>
+                        <div class="sub-key" id=d@@@{{pathIndex}}@@@{{$index}}>{{$index}}</div>
+                        <div class="sub-value" id=d@@@{{pathIndex}}@@@{{$index}}>{{$value}}</div>
+                    </div>
+                {{/each}}
+                </div>
+            {{/if}}
+
+            {{if dependencies && devDependencies}}
+                <div class="divider" style="margin: 20px 0;"></div>
+            {{/if}}
+
+            {{if devDependencies}}
+                <div style="background-color: #ff980026;padding: 0 10px;">
+                    <div class="sub-title">devDependencies</div>
+                    {{each devDependencies}}
+                        <div class="sub-dict" id=d@@@{{pathIndex}}@@@{{$index}}>
+                            <div class="sub-key" id=d@@@{{pathIndex}}@@@{{$index}}>{{$index}}</div>
+                            <div class="sub-value" id=d@@@{{pathIndex}}@@@{{$index}}>{{$value}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+    {{/if}}
+    
+</div>

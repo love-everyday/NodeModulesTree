@@ -1,0 +1,20 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Nodes Tree</title>
+</head>
+<a style="display: none;" href="" id="open-link"></a>
+<link rel="stylesheet" href="public/css/iconfont.css"/>
+<link rel="stylesheet" href="public/css/show.css"/>
+<script defer src="public/js/show.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<div class="container">
+    <div>
+        {{ include './card.art'}}
+    </div>
+    {{each modulesDetail}}
+       <div class="path-detail" id={{$index}}>    
+         {{ include './card.art' $value}}
+       </div>
+    {{/each}}
+    
+</div>

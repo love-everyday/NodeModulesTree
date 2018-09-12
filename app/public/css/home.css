@@ -1,0 +1,42 @@
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+}
+.button {
+    border: 1px solid #fff;
+    width: 200px;
+    height: 60px;
+    font-size: 20px;
+    box-shadow: 1px 1px 7px 1px #ccccccd6;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    line-height: 60px;
+    text-align: center;
+    display: inline-block;
+    background-color: #fff;
+    margin: 10px 20px 10px 20px;
+    color: #000;
+}
+.button:active {
+    border: 1px solid #ccccccd6;
+    box-shadow: none;
+    
+}
+.file-input {
+    width: 900px;
+    height: 60px;
+    line-height: 60px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #000;
+    background-color: #fff;
+    outline: none;
+    border: 1px sold #ccccccd6;
+    padding: 0 10px 0 10px;
+}
