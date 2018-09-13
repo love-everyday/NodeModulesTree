@@ -87,6 +87,7 @@
     color: #797979;
     display: block;
     padding-bottom: 10px;
+    max-width: 400px;
 }
 .version-detail {
     display: grid;
