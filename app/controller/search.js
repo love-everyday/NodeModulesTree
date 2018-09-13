@@ -5,7 +5,7 @@ const fs = require('fs');
 const { promisify } = require('util');
 const readFileAsync = promisify(fs.readFile);
 
-class ShowController extends Controller {
+class SearchController extends Controller {
   async index() {
     const { ctx } = this;
     const path = ctx.query.path;
@@ -19,22 +19,19 @@ class ShowController extends Controller {
       return;
     }
     const basePath = path.substr(0, path.length - 12);
+    let searchKey = ctx.query.search;
+    if (searchKey) {
+      searchKey = searchKey.replace(new RegExp(' ', 'g'), '');
+    }
     let pathIndex = 0;
-    // const content = await readFileAsync(path, 'utf-8');
-    // const obj = JSON.parse(content);
-    // obj.modulesDetail = {};
-    // obj.pathIndex = 1;
-    // let pathIndex = 1;
-    // const basePath = path.substr(0, path.length - 12);
-    // obj.packagePath = `/open?path=${decodeURI(basePath)}`;
-    // obj.packageName = obj.name;
-    // let packageName = ctx.query[`path${pathIndex}`];
+    let packageName = searchKey;
+    let requiredHref = `/search?path=${path}&search=`;
     const obj = { modulesDetail: {} };
-    let packageName = 'USER';
     while (packageName) {
+      requiredHref += packageName;
       let pathContent;
-      // const dirPath = `${basePath}node_modules/${packageName}/`;
-      const dirPath = packageName === 'USER' ? `${basePath}/` : `${basePath}node_modules/${packageName}/`;
+      const dirPath = packageName === 'USER' ? `${basePath}` : `${basePath}node_modules/${packageName}/`;
+
       let isSuccess = true;
       try {
         pathContent = await readFileAsync(`${dirPath}package.json`, 'utf-8');
@@ -47,6 +44,7 @@ class ShowController extends Controller {
       obj.modulesDetail[`path${pathIndex}`] = pathObj;
       if (isSuccess) {
         pathObj.packagePath = `/open?path=${decodeURI(dirPath)}`;
+        pathObj.showRequiredBy = true;
       } else {
         let preObj;
         if (pathIndex > 0) {
@@ -59,14 +57,47 @@ class ShowController extends Controller {
           }
         }
       }
+      requiredHref += `&path${pathIndex + 1}=`;
+      if (isSuccess && pathObj._requiredBy) {
+        const requiredBy = [];
+        const href = requiredHref;
+        let isUser = false;
+        pathObj._requiredBy.forEach(value => {
+          let _value = value;
+          if (_value === '/' || _value === '#DEV:/') {
+            _value = 'USER';
+          } else {
+            _value = _value.substring(1);
+          }
+          let canInsert = true;
+          if (_value === 'USER') {
+            if (isUser) {
+              canInsert = false;
+            } else {
+              isUser = true;
+            }
+          }
+          if (canInsert) {
+            requiredBy.push({ name: _value, href: `${href}${encodeURI(_value)}` });
+          }
+        });
+        pathObj._requiredBy = requiredBy;
+      }
+
       if (!this.app.packageCache) {
         this.app.packageCache = {};
       }
       // let packageRedis = await this.app.redis.get(packageName);
       let packageRedis = this.app.packageCache[packageName];
-      if (!(pathObj.private === true) && !packageRedis) {
-        const ret = await ctx.curl(`https://registry.npmjs.org/${packageName}`, { dataType: 'json', timeout: 10000 });
-        if (ret.status === 200) {
+      if (!packageRedis) {
+        let ret;
+        try {
+          ret = await ctx.curl(`https://registry.npmjs.org/${packageName}`, { dataType: 'json', timeout: 10000 });
+        } catch (error) {
+          ctx.body = error;
+          return;
+        }
+        if (ret && ret.status === 200) {
           const data = ret.data;
           const latest = data['dist-tags'].latest;
           const versionDetail = { latest: { version: latest, time: data.time[latest].split('T')[0] } };
@@ -96,8 +127,8 @@ class ShowController extends Controller {
       pathIndex++;
       packageName = ctx.query[`path${pathIndex}`];
     }
-    await ctx.render('show.art', obj);
+    await ctx.render('search.art', obj);
   }
 }
 
-module.exports = ShowController;
+module.exports = SearchController;

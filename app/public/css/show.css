@@ -1,7 +1,7 @@
 .container {
     position: relative;
     text-align: center;
-    padding: 20px;
+    padding: 20px 20px 20px 0px;
     display: inline-flex;
 }
 .card {

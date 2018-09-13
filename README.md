@@ -5,8 +5,9 @@ Only supported `Chrome Browser`.
 * [Art Template](https://aui.github.io/art-template/docs/index.html)
 
 ## Screenshot
-<img src="README_Images/home.png" style="max-height: 400px;">
-<img src="README_Images/show.png" style="max-height: 400px;">
+<img src="README_Images/home.png" style="max-height: 300px;">
+<img src="README_Images/show.png" style="max-height: 300px;">
+<img src="README_Images/search.png" style="max-height: 300px;">
 
 ## QuickStart
 

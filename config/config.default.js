@@ -24,7 +24,7 @@ module.exports = appInfo => {
   };
   */
   config.static = {
-    maxAge: 0,
+    maxAge: 365000,
     gzip: true,
   };
   config.compress = {

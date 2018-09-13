@@ -1,13 +1,11 @@
-<head>
-    <meta charset="UTF-8">
-    <title>Nodes Tree</title>
-</head>
+{{include './common.art'}}
 <link rel="stylesheet" href="public/css/home.css"/>
 <script defer src="public/js/home.js"></script>
 <div class="container">
-    <input type="text" value="" class="file-input" id="filepath" />
+    <input type="text" value="" class="file-input" id="filepath" placeholder="Input the absolute path of package.json in the root folder of a project" />
     <div style="display: block;"></div>
     <input type="button" class="button" id="clear" value="Clear"></input>
     <input type="button" class="button" id="submit" value="Submit"></input>
+    <input type="button" class="button" id="search" value="Search"></input>
     <a href="" id="new-page"></a>
 </div>

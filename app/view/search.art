@@ -1,14 +1,22 @@
 {{include './common.art'}}
+
 <link rel="stylesheet" href="public/css/iconfont.css"/>
 <link rel="stylesheet" href="public/css/show.css"/>
+<link rel="stylesheet" href="public/css/search.css"/>
+
 <script defer src="public/js/show.js"></script>
+<script defer src="public/js/search.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
 <a style="display: none;" href="" id="open-link"></a>
+<div class="search">
+    <input type="text" value="" class="search-input" id="search-input" />
+    <input type="button" class="button-search" id="button-search" value="Search"></input>
+</div>
 <div class="container">
     {{each modulesDetail}}
        <div class="path-detail" id={{$index}}>    
          {{ include './card.art' $value}}
        </div>
     {{/each}}
-    
 </div>
