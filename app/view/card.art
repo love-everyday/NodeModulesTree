@@ -32,22 +32,23 @@
     {{if des}}
         <div class="description">{{des}}</div>
     {{/if}}
-    {{if showRequiredBy && _requiredBy}}
-        <div class="divider"></div>
-        <div style="padding-bottom: 20px;">
-            <div class="requiredBy" id=requiredBy-{{pathIndex}}>
-            <div class="sub-title">requiredBy</div>
-            {{each _requiredBy}}
-                <a href={{$value.href}} id=d@@@{{pathIndex}}@@@{{$value.name}} class="requiredBy-package">{{$value.name}}</a>
-            {{/each}}
-        </div>
-        </div>
-    {{/if}}
-    {{if dependencies || devDependencies}}
-        <div class="divider"></div>
-        <div style="text-align: left;margin-top: 20px;padding-bottom: 20px;" id=dependencies-{{pathIndex}}>
-            {{if dependencies}}
-                <div style="background-color: #87ff6a26;padding: 0 10px;">
+    
+    <div style="text-align: left;margin-top: 20px;padding-bottom: 1px;" id=dependencies-{{pathIndex}}>
+        {{if showRequiredBy && _requiredBy}}
+            <div class="divider"></div>
+            <div style="padding-bottom: 20px;">
+                <div class="requiredBy" id=requiredBy-{{pathIndex}}>
+                    <div class="sub-title">requiredBy</div>
+                    {{each _requiredBy}}
+                        <div id=d@@@{{pathIndex}}@@@{{$value.name}} class="requiredBy-package">{{$value.name}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        {{/if}}
+        
+        {{if dependencies}}
+            <div class="divider"></div>
+            <div style="background-color: #87ff6a26;padding: 0 10px;margin: 20px 0;">
                 <div class="sub-title">dependencies</div>
                 {{each dependencies}}
                     <div class="sub-dict" id=d@@@{{pathIndex}}@@@{{$index}}>
@@ -55,25 +56,21 @@
                         <div class="sub-value" id=d@@@{{pathIndex}}@@@{{$index}}>{{$value}}</div>
                     </div>
                 {{/each}}
-                </div>
-            {{/if}}
+            </div>
+        {{/if}}
 
-            {{if dependencies && devDependencies}}
-                <div class="divider" style="margin: 20px 0;"></div>
-            {{/if}}
-
-            {{if devDependencies}}
-                <div style="background-color: #ff980026;padding: 0 10px;">
-                    <div class="sub-title">devDependencies</div>
-                    {{each devDependencies}}
-                        <div class="sub-dict" id=d@@@{{pathIndex}}@@@{{$index}}>
-                            <div class="sub-key" id=d@@@{{pathIndex}}@@@{{$index}}>{{$index}}</div>
-                            <div class="sub-value" id=d@@@{{pathIndex}}@@@{{$index}}>{{$value}}</div>
-                        </div>
-                    {{/each}}
-                </div>
-            {{/if}}
-        </div>
-    {{/if}}
+        {{if devDependencies}}
+            <div class="divider"></div>
+            <div style="background-color: #ff980026;padding: 0 10px;margin: 20px 0;">
+                <div class="sub-title">devDependencies</div>
+                {{each devDependencies}}
+                    <div class="sub-dict" id=d@@@{{pathIndex}}@@@{{$index}}>
+                        <div class="sub-key" id=d@@@{{pathIndex}}@@@{{$index}}>{{$index}}</div>
+                        <div class="sub-value" id=d@@@{{pathIndex}}@@@{{$index}}>{{$value}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/if}}
+    </div>
     
 </div>

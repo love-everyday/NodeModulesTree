@@ -89,7 +89,7 @@ class SearchController extends Controller {
       }
       // let packageRedis = await this.app.redis.get(packageName);
       let packageRedis = this.app.packageCache[packageName];
-      if (!packageRedis) {
+      if (!(pathObj.private === true) && !packageRedis) {
         let ret;
         try {
           ret = await ctx.curl(`https://registry.npmjs.org/${packageName}`, { dataType: 'json', timeout: 10000 });

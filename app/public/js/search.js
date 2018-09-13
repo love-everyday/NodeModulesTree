@@ -6,7 +6,8 @@ const openLink = () => {
     return;
   }
   const searchKey = searchInputElement.value.replace(new RegExp(' ', 'g'), '');
-  openLinkElement.href = `${window.location.origin}/search?path=${params.path}&search=${encodeURI(searchKey)}`;
+  const search = `?path=${params.path}&search=${encodeURI(searchKey)}`;
+  openLinkElement.href = `${window.location.origin}/search${search}`;
   openLinkElement.click();
 };
 

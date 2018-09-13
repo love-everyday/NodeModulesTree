@@ -46,9 +46,10 @@ const dependenciesOnClick = event => {
   }
   newParams[`path${pathIndex + 1}`] = idQuery[2];
   const search = `?${combineParamsToUrl(newParams)}`;
+  const md5Str = md5(search);
+  window.sessionStorage.setItem(`@@@historyscroll@@@${window.location.pathname}${md5Str}`, `[${document.body.scrollLeft + 200}, ${document.body.scrollTop}]`);
   openLinkElement.href = `${window.location.origin}${window.location.pathname}${search}`;
   openLinkElement.click();
-  window.sessionStorage.setItem(`@@@historyscroll@@@${search}`, `[${document.body.scrollLeft + 200}, ${document.body.scrollTop}]`);
 };
 const dependenciesOnListener = index => {
   const dependElement = document.getElementById(`dependencies-${index}`);
@@ -103,7 +104,8 @@ window.onload = () => {
       pathIndex++;
       packageName = params[`path${pathIndex + 1}`];
     }
-    const scrollOff = window.sessionStorage.getItem(`@@@historyscroll@@@${window.location.search}`);
+    const md5Str = md5(window.location.search);
+    const scrollOff = window.sessionStorage.getItem(`@@@historyscroll@@@${window.location.pathname}${md5Str}`);
     const off = JSON.parse(scrollOff);
     if (off && off.length) {
       document.body.scrollLeft = off[0];
@@ -114,5 +116,6 @@ window.onload = () => {
 
 
 window.onscroll = () => {
-  window.sessionStorage.setItem(`@@@historyscroll@@@${window.location.search}`, `[${document.body.scrollLeft}, ${document.body.scrollTop}]`);
+  const md5Str = md5(window.location.search);
+  window.sessionStorage.setItem(`@@@historyscroll@@@${window.location.pathname}${md5Str}`, `[${document.body.scrollLeft}, ${document.body.scrollTop}]`);
 };

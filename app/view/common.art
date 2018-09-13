@@ -1,5 +1,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Nodes Tree</title>
+    <script defer src="public/js/md5.js"></script>
 </head>
 <link rel="stylesheet" href="public/css/global.css"/>
