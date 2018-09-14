@@ -4,6 +4,12 @@
 <script defer src="public/js/show.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <a style="display: none;" href="" id="open-link"></a>
+<div class="button-list">
+    <div style="display: flex;">
+        <i class="icon iconfont icon-home" id="button-home"></i>
+        <i class="icon iconfont icon-search" id="show-search"></i>
+    </div>
+</div>
 <div class="container">
     {{each modulesDetail}}
        <div class="path-detail" id={{$index}}>    

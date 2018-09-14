@@ -81,8 +81,13 @@ class ParsePackageService extends Service {
       }
       // let packageRedis = await this.app.redis.get(packageName);
       let packageRedis = this.app.packageCache[packageName];
-      if (!(pathObj.private === true) && !packageRedis) {
-        const ret = await ctx.curl(`https://registry.npmjs.org/${packageName}`, { dataType: 'json', timeout: 10000 });
+      if (!(pathObj.private === true) && packageName !== 'USER' && !packageRedis) {
+        let ret;
+        try {
+          ret = await ctx.curl(`https://registry.npmjs.org/${packageName}`, { dataType: 'json', timeout: 10000 });
+        } catch (error) {
+          throw error.res;
+        }
         if (ret && ret.status === 200) {
           const data = ret.data;
           const latest = data['dist-tags'].latest;

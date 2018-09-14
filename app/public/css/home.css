@@ -30,7 +30,7 @@
 .file-input {
     width: 900px;
     height: 60px;
-    line-height: 60px;
+    line-height: 40px;
     display: inline-block;
     margin-bottom: 20px;
     font-size: 20px;
@@ -38,5 +38,5 @@
     background-color: #fff;
     outline: none;
     border: 1px sold #ccccccd6;
-    padding: 0 10px 0 10px;
+    padding: 20px 10px;
 }

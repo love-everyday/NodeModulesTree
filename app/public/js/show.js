@@ -9,6 +9,7 @@ const getParamsFromUrl = url => {
   });
   return result;
 };
+const params = getParamsFromUrl(window.location.search);
 const combineParamsToUrl = params => {
   let query = '';
   Object.keys(params).forEach(key => {
@@ -30,7 +31,7 @@ const dependenciesOnClick = event => {
     return;
   }
   const pathIndex = parseInt(idQuery[1]);
-  const params = getParamsFromUrl(window.location.search);
+
   const newParams = { path: params.path };
   if (params.search) {
     newParams.search = params.search;
@@ -76,46 +77,74 @@ const openFileOnListener = index => {
     };
   }
 };
-const showCard = index => {
-  const cardElement = document.getElementById(`card-${index}`);
-  if (cardElement) {
-    cardElement.style.display = 'block';
+
+const adjustElementPostionAndEvent = (listener = true) => {
+  let pathIndex = 0;
+  let packageName = params[`path${pathIndex + 1}`];
+  if (listener) {
+    dependenciesOnListener(pathIndex);
+    openFileOnListener(pathIndex);
+  }
+  while (packageName) {
+    const selectedElement = document.getElementById(`d@@@${pathIndex}@@@${packageName}`);
+    const pathDetailElement = document.getElementById(`path${pathIndex + 1}`);
+    pathDetailElement.style.marginTop = selectedElement.offsetTop;
+    if (listener) {
+      selectedElement.style.backgroundColor = '#03a9f41a';
+      selectedElement.style.color = '#1890ff';
+      dependenciesOnListener(pathIndex + 1);
+      openFileOnListener(pathIndex + 1);
+    }
+
+    pathIndex++;
+    packageName = params[`path${pathIndex + 1}`];
   }
 };
 
+adjustElementPostionAndEvent();
+
+const md5Str = md5(window.location.search);
+const scrollOff = window.sessionStorage.getItem(`@@@historyscroll@@@${window.location.pathname}${md5Str}`);
+const off = JSON.parse(scrollOff);
+if (off && off.length) {
+  document.body.scrollLeft = off[0];
+  document.body.scrollTop = off[1];
+}
+
 window.onload = () => {
-  (function() {
-    const params = getParamsFromUrl(window.location.search);
-
-    let pathIndex = 0;
-    let packageName = params[`path${pathIndex + 1}`];
-    dependenciesOnListener(pathIndex);
-    openFileOnListener(pathIndex);
-    while (packageName) {
-      showCard(pathIndex + 1);
-      const selectedElement = document.getElementById(`d@@@${pathIndex}@@@${packageName}`);
-      selectedElement.style.backgroundColor = '#03a9f41a';
-      selectedElement.style.color = '#1890ff';
-      const pathDetailElement = document.getElementById(`path${pathIndex + 1}`);
-      dependenciesOnListener(pathIndex + 1);
-      openFileOnListener(pathIndex + 1);
-      pathDetailElement.style.marginTop = selectedElement.offsetTop;
-
-      pathIndex++;
-      packageName = params[`path${pathIndex + 1}`];
-    }
-    const md5Str = md5(window.location.search);
-    const scrollOff = window.sessionStorage.getItem(`@@@historyscroll@@@${window.location.pathname}${md5Str}`);
-    const off = JSON.parse(scrollOff);
-    if (off && off.length) {
-      document.body.scrollLeft = off[0];
-      document.body.scrollTop = off[1];
-    }
-  })();
+  adjustElementPostionAndEvent(false);
 };
-
-
 window.onscroll = () => {
   const md5Str = md5(window.location.search);
   window.sessionStorage.setItem(`@@@historyscroll@@@${window.location.pathname}${md5Str}`, `[${document.body.scrollLeft}, ${document.body.scrollTop}]`);
 };
+
+const homeElement = document.getElementById('button-home');
+if (homeElement) {
+  homeElement.onclick = () => {
+    openLinkElement.href = window.location.origin;
+    openLinkElement.click();
+  };
+}
+
+const showElement = document.getElementById('button-show');
+if (showElement) {
+  showElement.onclick = () => {
+    if (!params.path) {
+      return;
+    }
+    openLinkElement.href = `${window.location.origin}/show?path=${params.path}`;
+    openLinkElement.click();
+  };
+}
+
+const showSearchElement = document.getElementById('show-search');
+if (showSearchElement) {
+  showSearchElement.onclick = () => {
+    if (!params.path) {
+      return;
+    }
+    openLinkElement.href = `${window.location.origin}/search?path=${params.path}`;
+    openLinkElement.click();
+  };
+}

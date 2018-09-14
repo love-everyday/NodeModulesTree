@@ -10,8 +10,12 @@
 
 <a style="display: none;" href="" id="open-link"></a>
 <div class="search">
-    <input type="text" value="" class="search-input" id="search-input" />
-    <input type="button" class="button-search" id="button-search" value="Search"></input>
+    <div style="display: flex;">
+        <input type="text" value="" class="search-input" id="search-input" />
+        <i class="icon iconfont icon-search" id="button-search"></i>
+        <i class="icon iconfont icon-home" id="button-home"></i>
+        <i class="icon iconfont icon-tree" id="button-show"></i>
+    </div>
 </div>
 <div class="container">
     {{each modulesDetail}}

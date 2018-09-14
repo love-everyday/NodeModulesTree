@@ -1,5 +1,4 @@
-{{set cardStyle = pathIndex === 0 ? "" : "display:none;"}}
-<div class="card" id=card-{{pathIndex}} style={{cardStyle}}>
+<div class="card" id=card-{{pathIndex}} >
     {{set hrefPage = homepage ? homepage : "javascript:volid(0);"}}
     {{set hrefClass = homepage ? 'name' : ''}}
     <a class={{hrefClass}} href={{hrefPage}} target="_blank">
