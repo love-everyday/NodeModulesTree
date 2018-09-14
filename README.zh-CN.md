@@ -1,5 +1,12 @@
-# NodesTree
+# NodesModulesTree
+开发`Node.js`项目过程中，`node_modules`文件夹下有茫茫多第三方库，其中的库之间的依赖关系和版本是否过期也很难理清。所以我尝试开发了`NodesModulesTree`来帮助我理清这些第三方库的依赖关系和版本信息。<br>
+* [Egg](https://eggjs.org/en/intro/index.html)
+* [Art Template](https://aui.github.io/art-template/docs/index.html)
 
+## 截图
+<img src="README_Images/home.png" height="400">
+<img src="README_Images/show.png" height="400">
+<img src="README_Images/search.png" height="400">
 
 
 ## 快速入门

@@ -1,6 +1,7 @@
 # NodesTree
+[中文](README.zh-CN.md)<br>
 This project can help you know which `npm packages` used in your project.<br>
-Only supported `Chrome Browser`.
+It is a tree diagram about `npm packages` dependence relation.
 * [Egg](https://eggjs.org/en/intro/index.html)
 * [Art Template](https://aui.github.io/art-template/docs/index.html)
 
