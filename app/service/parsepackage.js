@@ -9,12 +9,10 @@ class ParsePackageService extends Service {
     const { ctx } = this;
     const isExist = await promisify(fs.exists)(path);
     if (!isExist) {
-      ctx.body = `Not found file in path ${path}`;
-      return;
+      throw `Not found file in path ${path}`;
     }
     if (path.indexOf('package.json') !== (path.length - 12)) {
-      ctx.body = 'This file must be package.json';
-      return;
+      throw 'This file must be package.json';
     }
     const basePath = path.substr(0, path.length - 12);
     let pathIndex = 0;
@@ -84,13 +82,7 @@ class ParsePackageService extends Service {
       // let packageRedis = await this.app.redis.get(packageName);
       let packageRedis = this.app.packageCache[packageName];
       if (!(pathObj.private === true) && !packageRedis) {
-        let ret;
-        try {
-          ret = await ctx.curl(`https://registry.npmjs.org/${packageName}`, { dataType: 'json', timeout: 10000 });
-        } catch (error) {
-          ctx.body = error;
-          return;
-        }
+        const ret = await ctx.curl(`https://registry.npmjs.org/${packageName}`, { dataType: 'json', timeout: 10000 });
         if (ret && ret.status === 200) {
           const data = ret.data;
           const latest = data['dist-tags'].latest;

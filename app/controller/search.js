@@ -11,8 +11,12 @@ class SearchController extends Controller {
     if (searchKey) {
       searchKey = searchKey.replace(new RegExp(' ', 'g'), '');
     }
-    const obj = await ctx.service.parsepackage.parse(searchKey, path, 'requiredBy');
-    await ctx.render('search.art', obj);
+    try {
+      const obj = await ctx.service.parsepackage.parse(searchKey, path, 'requiredBy');
+      await ctx.render('search.art', obj);
+    } catch (error) {
+      ctx.body = error;
+    }
   }
 }
 
